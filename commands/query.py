@@ -128,5 +128,6 @@ class Query(commands.Cog):
             print("--> Error: Query - Command !update. <--")
             print(error)
     
+
 def setup(bot):
     bot.add_cog(Query(bot))

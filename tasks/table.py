@@ -324,5 +324,6 @@ class Table(commands.Cog):
             print("--> Error: Tables - Clear Update Ammo Table. <--")
             print(error)
 
+
 def setup(bot):
     bot.add_cog(Table(bot))

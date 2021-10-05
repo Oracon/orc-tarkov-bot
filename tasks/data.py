@@ -66,7 +66,10 @@ class Data(commands.Cog):
             else:
                 for k in self.d_links:
                     url = self.d_links[f"{k}"]# Get url from dict
-                    data = requests.get(url).json()
+                    
+                    data = requests.get(url)
+                    data = json.load(data)
+                    
                     name = "./json/" + k + ".json"
 
                     with open(name, 'w') as f:
@@ -213,6 +216,7 @@ class Data(commands.Cog):
         except Exception as error:
             print(f"--> Error: Parsing JSON - Saving JSON. <--")
             print(error)
+
 
 def setup(bot):
     bot.add_cog(Data(bot))
