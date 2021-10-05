@@ -67,7 +67,7 @@ class Data(commands.Cog):
                 for k in self.d_links:
                     url = self.d_links[f"{k}"]# Get url from dict
                     data = requests.get(url)
-                    data = json.loads(data)
+                    data = json.load(data)
                     name = "./json/" + k + ".json"
 
                     with open(name, 'w') as f:
