@@ -53,7 +53,6 @@ class Data(commands.Cog):
         # S -> subsonic: 33 - Except: 'grenade' and 'VOG-30' (41 total)
         # T -> Tracer - 16
 
-
     @commands.Cog.listener()
     async def on_ready(self):
         self.current_time.start()
@@ -75,7 +74,6 @@ class Data(commands.Cog):
 
                     print(f"Data file created: {k}.json")
 
-
                 try:# Removes the last JSON element of ammos - Wrong element -> '5485a8684bdc2da71d8b4567'
                     file = "./json/ammunition.json"
                     with open(file, 'r') as f:# Read the file
@@ -87,18 +85,15 @@ class Data(commands.Cog):
 
                     print(f"Data file edited: ammunition.json -> Removed last element: '5485a8684bdc2da71d8b4567'.")
 
-
                 except Exception as error:
                     # await ctx.send("Ops... Deu algum erro!")
                     print("--> Error: Editing 'ammunition' json file. <--")
                     print(error)
 
-
         except Exception as error:
             # await ctx.send("Ops... Deu algum erro!")
             print("--> Error: Saving json file(s). <--")
             print(error)
-
 
 
         try:# Loading json files
@@ -208,7 +203,6 @@ class Data(commands.Cog):
             print(error)
                 
 
-
         try:# Saving JSON.
             path_new_parsed = "./parsed/parsed_ammunition.json"# Saving New Parsed JSON
             with open(path_new_parsed, "w") as new:
@@ -216,11 +210,9 @@ class Data(commands.Cog):
                 
             print(f"File '{path_new_parsed}' created.")
             
-
         except Exception as error:
             print(f"--> Error: Parsing JSON - Saving JSON. <--")
             print(error)
-
 
 def setup(bot):
     bot.add_cog(Data(bot))

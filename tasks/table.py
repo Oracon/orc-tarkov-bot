@@ -150,22 +150,12 @@ class Table(commands.Cog):
                 # msg.update({ ch_name_only[i] : (tabulate(text, headers=title, tablefmt="presto", colalign="left", numalign="left")) })
                 msg.update({ ch_name_only[i] : (tabulate(text, headers=title, tablefmt="pretty", colalign="left")) })
 
-                '''
-                if self.update:# If update is live, the old values is self.ch_msg
-                    with open(path_old_parsed, "w") as old:# Save New as Old.
-                        json.dump(new_parsed, old)
-                    self.update = False
-                else:
-                    self.ch_msg = copy.deepcopy(msg)# Deep copy to check for next update
-                '''
-
             return msg
 
 
         except Exception as error:
             print("--> Error: Tables - Create Ammo - Creating Lines and Tabulate with Title. <--")
             print(error)
-
 
 
 
@@ -190,7 +180,6 @@ class Table(commands.Cog):
                 diffkeys = [k for k in new_parsed if new_parsed[k] != old_parsed[k]]
             
             return diffkeys
-
 
         except Exception as error:
             print(f"--> Error: Tables - Check update. <--")
@@ -254,7 +243,6 @@ class Table(commands.Cog):
                 else:
                     print(f"Ammo Table: {ammo_table} not found.")
 
-
         except Exception as error:
             await ctx.send("Oops... Not possible to delete Ammo table.")
             print("--> Error: Tables - Not possible to delete Ammo table. <--")
@@ -302,7 +290,6 @@ class Table(commands.Cog):
                 with open(old_p_file, "w") as old:# Save New as Old.
                     json.dump(data, old)
 
-
             else:# Don't send msg
                 await ctx.send(f"There is no Ammo Table update.")
 
@@ -331,7 +318,6 @@ class Table(commands.Cog):
                 json.dump(new_parsed, old)
             
             await ctx.send(f"Update cleared.")
-
 
         except Exception as error:
             await ctx.send("Oops... Not possible to Clear Ammo Table Update.")

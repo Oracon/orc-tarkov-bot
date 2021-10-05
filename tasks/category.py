@@ -39,8 +39,7 @@ class Category(commands.Cog):
                 await ctx.reply(f"Category `'{ammo_cat_name}'`.")
 
             return ammo_cat# Returns Ammo Category to create tables
-            
-        
+                    
         except Exception as error:
             await ctx.send("Oops... Not possible to create Ammo Category.")
             print("--> Error: Ammo Category not created. <--")
@@ -56,7 +55,6 @@ class Category(commands.Cog):
                 #ammo_cat = await ctx.guild.delete_category(ammo_cat_name)
                 await ammo_cat.delete()
                 await ctx.reply(f"Ammo Category: `'{ammo_cat}'` deleted!")
-
 
         except Exception as error:
             await ctx.send("Oops... Not possible to delete Ammo Category.")

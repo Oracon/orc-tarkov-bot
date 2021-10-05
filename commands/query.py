@@ -85,8 +85,6 @@ class Query(commands.Cog):
 
 
 
-
-
     # Create command
     @commands.command(name="create", help="Creates table for the option selected. Arguments: 'ammo'.")
     async def create(self, ctx, option=''):

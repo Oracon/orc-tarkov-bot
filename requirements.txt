@@ -1,5 +1,4 @@
 requests
-decouple
 discord.py
 python-decouple
 tabulate
