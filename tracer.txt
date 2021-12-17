@@ -1,0 +1,17 @@
+Trace:
+
+.45 ACP Lasermatch FMJ
+12.7x108 mm BZT-44M gzh
+5.45x39mm BT gs
+5.45x39mm T gs
+5.56x45mm M856
+5.56x45mm M856A1
+5.7x28mm L191
+7.62x25mm TT PT gzh
+7.62x39mm T-45M1 gzh
+7.62x51mm M62
+7.62x54R BT gzh
+7.62x54R T-46M
+9x18mm PM PPT gzh
+9x19mm T gzh
+9x21mm BT gzh

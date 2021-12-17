@@ -5,6 +5,7 @@ from decouple import config
 from discord.ext import commands
 from tasks.table import Table
 from tasks.category import Category
+from tasks.tk import Tk
 
 
 class Query(commands.Cog):
@@ -22,6 +23,8 @@ class Query(commands.Cog):
         self.CALIBERS = config("CALIBERS")# Chosen based on JSON file 'name' to filter categories
         self.CALIBERS_NAME = config("CALIBERS_NAME")# table at https://escapefromtarkov.fandom.com/wiki/Ballistics
         self.CH_NAME_ONLY = config("CH_NAME_ONLY")# For creating and deleting ds channels only
+
+        self.DS_USERS_TK = config("DS_USERS_TK")
         
         # str -> list
         self.CALIBERS = list(map(lambda x: x.split(',')[-1], json.loads(self.CALIBERS)))
@@ -45,6 +48,19 @@ class Query(commands.Cog):
             await ctx.send("Oops... Not possible to create or find Category.")
             print("--> Error: Query - Not possible to create or find Category. <--")
             print(error)
+
+
+    # Create TK
+    async def create_tk(self, ctx):
+        try:
+            ...
+            await Tk.create_tk_table(self, ctx, self.DS_USERS_TK)
+
+        except Exception as error:
+            await ctx.send("Oops... Not possible to create or find Little TK table.")
+            print("--> Error: Query - Not possible to create or find Little TK table. <--")
+            print(error)
+    
 
 
     # Delete Ammo
@@ -85,7 +101,7 @@ class Query(commands.Cog):
 
 
 
-    # Create command
+    # Create Ammo Command
     @commands.command(name="create", help="Creates table for the option selected. Arguments: 'ammo'.")
     async def create(self, ctx, option=''):
         try:
@@ -99,7 +115,18 @@ class Query(commands.Cog):
             print(error)
 
 
-    # Delete command
+    # Create TK Command - "async def create(self, ctx):" makes create ammo unusable
+    # @commands.command(name="tk", help="Creates the Little TK table. No Arguments.")
+    # async def create(self, ctx):
+    #     try:
+    #         await self.create_tk(ctx)
+                    
+    #     except Exception as error:
+    #         print("--> Error: Query - Command !tk. <--")
+    #         print(error)
+
+
+    # Delete Ammo Command
     @commands.command(name="delete", help="Deletes the whole Category for the option selected. Arguments: 'ammo'.")
     async def delete(self, ctx, option=''):
         try:
@@ -113,7 +140,7 @@ class Query(commands.Cog):
             print(error)
 
 
-    # Update command
+    # Update Ammo Command
     @commands.command(name="update", help="Show or Clear Updates for option selected. Arguments: '', 'ammo', 'clear'.")
     async def update(self, ctx, option='ammo'):
         try:

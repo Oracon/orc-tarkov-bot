@@ -11,6 +11,7 @@ class Manager(commands.Cog):
 
     @commands.Cog.listener()
     async def on_ready(self):
+        # await self.bot.wait_until_ready()
         print(f"{self.bot.user} is Online!")
 
 

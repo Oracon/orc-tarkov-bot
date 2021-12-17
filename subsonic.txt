@@ -1,0 +1,46 @@
+Subsonic: Check Spelling
+
+except:
+30x29 mm VOG-30 *
+40x46mm M381(HE) grenade *
+40x46mm M386 (HE) grenade *
+40x46mm M406 (HE) grenade *
+40x46mm M433 (HEDP) grenade *
+40x46mm M441(HE) grenade *
+40x46mm M576 (MP-APERS) grenade *
+
+
+.45 ACP AP
+.45 ACP Hydra-Shok
+.45 ACP Lasermatch FMJ
+.45 ACP Match FMJ
+.45 ACP RIP
+12.7x55 mm PS12
+12.7x55 mm PS12A
+12.7x55 mm PS12B
+12/70 5.25mm Buckshot
+12/70 Flechette
+20/70 5.6mm Buckshot
+23x75mm "Shrapnel-10" buckshot
+23x75mm "Zvezda" flashbang round
+4.6x30mm Subsonic SX
+5.45x39mm US gs
+5.7x28mm SB193
+7.62x39mm US gzh
+9x18mm PM BZhT gzh
+9x18mm PM P gzh
+9x18mm PM PPT gzh
+9x18mm PM PPe gzh
+9x18mm PM PRS gs
+9x18mm PM PS gs PPO
+9x18mm PM PSO gzh
+9x18mm PM PSV
+9x18mm PM Pst gzh
+9x18mm PM RG028 gzh
+9x18mm PM SP8 gzh
+9x19mm PSO gzh
+9x19mm QuakeMaker
+9x39 mm SP5 gs
+9x39 mm SP6 gs
+9x39mm BP gs
+9x39mm SPP gs

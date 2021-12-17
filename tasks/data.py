@@ -10,7 +10,6 @@ from commands.query import Query
 from tasks.table import Table
 
 
-
 class Data(commands.Cog):
     """Work with data"""
 
@@ -67,11 +66,13 @@ class Data(commands.Cog):
                 for k in self.d_links:
                     url = self.d_links[f"{k}"]# Get url from dict
                     data = requests.get(url)
-                    data = json.load(data)
+                    # This is not working right now
+                    # data = json.loads(data)
+                    data = data.json()
                     name = "./json/" + k + ".json"
 
                     with open(name, 'w') as f:
-                        json.dump(data, f)
+                         json.dump(data, f)
 
                     print(f"Data file created: {k}.json")
 
