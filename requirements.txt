@@ -2,3 +2,5 @@ requests
 discord.py
 python-decouple
 tabulate
+networkx
+matplotlib
