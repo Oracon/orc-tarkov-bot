@@ -15,7 +15,6 @@ class Table(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
         self.update = True
-        self.ch_msg = {}
 
         '''
         armor colors 0 = diff - | 1 = diff - | 2 = css [] | 3 = css [] | 4 = css [] | 5 = cs '' | 6 = diff +
@@ -61,6 +60,11 @@ class Table(commands.Cog):
 
                     old_parsed_elements = [old_dmg, old_pen_power, old_arm_dmg, old_accrcy, old_recoil, old_frag_chce]
 
+                    for i, old in enumerate(old_parsed_elements):
+                        if old == None:
+                            old = 0
+                            old_parsed_elements[i] = old
+
                     # New Parsed
                     dmg = data[cat]['damage'][j]
                     pen_power = data[cat]['penetrationPower'][j]
@@ -71,7 +75,12 @@ class Table(commands.Cog):
 
                     new_parsed_elements = [dmg, pen_power, arm_dmg, accrcy, recoil, frag_chce]
 
-                    
+                    for i, new in enumerate(new_parsed_elements):
+                        if new == None:
+                            new = 0
+                            new_parsed_elements[i] = new
+
+
                     try:# Inserting signs, color and flags 🢁 🢃 🡅 🡇
 
                         if dmg == old_dmg:# Damage
@@ -137,19 +146,19 @@ class Table(commands.Cog):
                     # Creating list - Original values ->
                     # line = [data[cat]['name'][j], data[cat]['damage'][j], data[cat]['penetrationPower'][j], data[cat]['armorDamage'][j], data[cat]['accuracy'][j], data[cat]['recoil'][j], data[cat]['fragmentationChance'][j]]
                     line = [data[cat]['name'][j], dmg, pen_power, arm_dmg, accrcy, recoil, frag_chce]
-                    
                     text.append(line)# Append list of line -> Text = list of lines
-                
+
                 '''
                 table_fmts = ["plain", "simple", "github", "grid", "fancy_grid", "pipe", "orgtbl", "jira",
                 "presto", "pretty", "psql", "rst", "mediawiki", "moinmoin", "youtrack", "html",
                 "unsafehtml", "latex", "latex_raw","latex_booktabs", "latex_longtable", "textile", "tsv"]
                 '''
-
+                
                 # Populate msg dict with 'ch_name_only' as keys
                 # msg.update({ ch_name_only[i] : (tabulate(text, headers=title, tablefmt="presto", colalign="left", numalign="left")) })
+                
                 msg.update({ ch_name_only[i] : (tabulate(text, headers=title, tablefmt="pretty", colalign="left")) })
-
+            
             return msg
 
 
@@ -191,13 +200,14 @@ class Table(commands.Cog):
     async def create_ammo_table(self, ctx, ammo_cat, ch_name_only, calibers_name):
         
         try:
+            msg = {}
             p_file = "./parsed/parsed_ammunition.json"
             with open(p_file, 'r') as p:# Read the file
                 data = json.load(p)
 
                 # Whole discord text to send filtered by 'ch_name_only'
-                msg = Table.create_msg(self, ch_name_only, data)
-
+                msg.update(Table.create_msg(self, ch_name_only, data))
+                
                 # Create Ammo Table
                 for cal in ch_name_only:
                     # Get Category
@@ -215,7 +225,6 @@ class Table(commands.Cog):
                     else:
                         await ammo_table.purge()# Clear chat
                         await ammo_table.send(f"`{msg[cal]}`")# Send as Code to ds
-
 
                 print(f"Message sent to '{ch_name_only}' channels.")
 
@@ -253,14 +262,15 @@ class Table(commands.Cog):
     async def update_ammo_table(self, ctx, ammo_cat, ch_name_only, calibers_name):
         
         try:
+            msg = {}
             p_file = "./parsed/parsed_ammunition.json"
             with open(p_file, 'r') as p:# Read the file
                 data = json.load(p)
-            
+
             # New Recent Ammo updated
             diffkeys = Table.check_update(self)
             
-            msg = Table.create_msg(self, ch_name_only, data)
+            msg.update(Table.create_msg(self, ch_name_only, data))
 
             if len(diffkeys) > 0:# There is an update
                 await ctx.send(f"Ammo Table updated: `{' | '.join(str(d) for d in diffkeys)}`.")
@@ -270,7 +280,7 @@ class Table(commands.Cog):
                     for i, c in enumerate(calibers_name):
                         if d == c:
                             upd_cal = ch_name_only[i]
-                        
+
                             # Get Category
                             ammo_table = discord.utils.get(ctx.guild.channels, name=upd_cal)
                             # Create new updated ammo table
@@ -288,7 +298,7 @@ class Table(commands.Cog):
                 # After updating Different Keys, save New as Old
                 old_p_file = "./parsed/old_parsed_ammunition.json"
                 with open(old_p_file, "w") as old:# Save New as Old.
-                    json.dump(data, old)
+                    json.dump(data, old, indent=2)
 
             else:# Don't send msg
                 await ctx.send(f"There is no Ammo Table update.")

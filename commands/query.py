@@ -5,6 +5,7 @@ from decouple import config
 from discord.ext import commands
 from tasks.table import Table
 from tasks.category import Category
+from tasks.quest import Quest
 from tasks.tk import Tk
 
 
@@ -51,15 +52,15 @@ class Query(commands.Cog):
 
 
     # Create TK
-    async def create_tk(self, ctx):
-        try:
-            ...
-            await Tk.create_tk_table(self, ctx, self.DS_USERS_TK)
+    # async def create_tk(self, ctx):
+    #     try:
+    #         ...
+    #         await Tk.create_tk_table(self, ctx, self.DS_USERS_TK)
 
-        except Exception as error:
-            await ctx.send("Oops... Not possible to create or find Little TK table.")
-            print("--> Error: Query - Not possible to create or find Little TK table. <--")
-            print(error)
+    #     except Exception as error:
+    #         await ctx.send("Oops... Not possible to create or find Little TK table.")
+    #         print("--> Error: Query - Not possible to create or find Little TK table. <--")
+    #         print(error)
     
 
 
@@ -100,9 +101,19 @@ class Query(commands.Cog):
             print(error)
 
 
+    # Quests
+    async def show_quest(self, ctx, option):
+        try:
+            await Quest.create_quest(self, ctx, option)# Create Quest
+
+        except Exception as error:
+            await ctx.send("Oops... Not possible to show or find Quest.")
+            print("--> Error: Query - Not possible to show or find Quest. <--")
+            print(error)
+
 
     # Create Ammo Command
-    @commands.command(name="create", help="Creates table for the option selected. Arguments: 'ammo'.")
+    @commands.command(aliases=['creates', 'c'], help="Creates table for the option selected. Arguments: 'ammo'.")
     async def create(self, ctx, option=''):
         try:
             if option == 'ammo':
@@ -127,13 +138,13 @@ class Query(commands.Cog):
 
 
     # Delete Ammo Command
-    @commands.command(name="delete", help="Deletes the whole Category for the option selected. Arguments: 'ammo'.")
+    @commands.command(aliases=['deletes', 'del', 'd'], help="Deletes the whole Category for the option selected. Arguments: 'ammo'.")
     async def delete(self, ctx, option=''):
         try:
             if option == 'ammo':
                 await self.delete_ammo(ctx)
             else:#'ammo', 'maps', 'quests','traders', 'hideout', 'item_preset', 'items'
-                await ctx.reply("No data selected. Please choose one option: `'ammo'`. and type `!create 'option'`.")
+                await ctx.reply("No data selected. Please choose one option: `'ammo'`. and type `!delete 'option'`.")
         
         except Exception as error:
             print("--> Error: Query - Command !delete. <--")
@@ -141,7 +152,7 @@ class Query(commands.Cog):
 
 
     # Update Ammo Command
-    @commands.command(name="update", help="Show or Clear Updates for option selected. Arguments: '', 'ammo', 'clear'.")
+    @commands.command(aliases=['updates', 'u'], help="Show or Clear Updates for option selected. Arguments: '', 'ammo', 'clear'.")
     async def update(self, ctx, option='ammo'):
         try:
             if option == 'ammo':# Update
@@ -155,6 +166,22 @@ class Query(commands.Cog):
             print("--> Error: Query - Command !update. <--")
             print(error)
     
+
+    # Quests Command
+    @commands.command(aliases=['quests', 'q'], help="Show the Quests as commanded. Arguments: 'kappa'.")
+    async def quest(self, ctx, option='', option2=''):
+        try:
+            if option != '':
+                await self.show_quest(ctx, option)
+            else:#'', 'all', 'kappa','lvl xx', 'item'
+                await self.show_quest(ctx, option)
+                # await ctx.reply("No data selected. Please choose one option: `'all'`, `'kappa'`, `'lvl'` or `'item'`. and type `!quest 'option'`.")
+                await ctx.reply("No data selected. Please choose one option: `'all'`, `'kappa'` or `'text'`. and type `!quest 'option'`.")
+        
+        except Exception as error:
+            print("--> Error: Query - Command !quest. <--")
+            print(error)
+
 
 def setup(bot):
     bot.add_cog(Query(bot))
